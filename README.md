@@ -33,6 +33,10 @@ The repo ships with sample kits for common stacks. Each lists commands, structur
 | `python-fastapi` | Python, FastAPI, Pydantic, Alembic |
 | `go` | Go services and libraries |
 | `php-laravel` | PHP, Laravel |
+| `flutter` | Dart, Flutter (mobile) |
+| `react-native` | TypeScript, React Native with Expo or bare workflow (mobile) |
+| `android-kotlin` | Kotlin, native Android with Compose or Views (mobile) |
+| `ios-swift` | Swift, native iOS with SwiftUI or UIKit (mobile) |
 
 The samples are starting points: review each one against your own conventions before a project uses it, and grow its "Rules agents often break" list from real mistakes. For a stack not listed, copy `kits/_template/` to `kits/<stack>/` and fill it in. The init script offers every kit folder except those starting with `_`, and refuses a kit that is still the blank template.
 
@@ -101,7 +105,6 @@ How many projects count as "several" is left to each organization.
 - [ ] CI check that fails when a test is deleted or skipped
 - [ ] CODEOWNERS examples for CI, infrastructure and dependency files
 - [ ] Ready-made checks for each sample kit (linter configs, architecture tests)
-- [ ] Sample kits for mobile stacks
 - [ ] Script that concatenates the levels into one `AGENTS.md` for non-Claude agents
 - [ ] PowerShell version of the init script
 
