@@ -15,17 +15,33 @@ Built for software services and outsourcing teams, where every client has a diff
 .
 ├── level1-company/AGENTS.md          Process and safety rules for every project
 ├── level2-division/                  Template for division rules
-├── kits/dotnet-maui/AGENTS.md        Stack kit (add one folder per stack)
+├── kits/                             One stack kit per folder: samples plus _template/
 ├── level3-project/                   Templates: AI policy record, project rules, CLAUDE.md
 └── scripts/init-project.sh           Interactive setup for a new project
 ```
+
+## Stack kits
+
+The repo ships with sample kits for common stacks. Each lists commands, structure rules, the mistakes agents most often make on that stack, and the checks that should enforce them.
+
+| Kit | Stack |
+| --- | --- |
+| `java-spring-boot` | Java, Spring Boot, Maven or Gradle |
+| `dotnet-aspnet-core` | C#, ASP.NET Core, EF Core |
+| `typescript-react` | TypeScript, React front-ends |
+| `typescript-node` | TypeScript, Node.js back-ends (Express, NestJS, Fastify) |
+| `python-fastapi` | Python, FastAPI, Pydantic, Alembic |
+| `go` | Go services and libraries |
+| `php-laravel` | PHP, Laravel |
+
+The samples are starting points: review each one against your own conventions before a project uses it, and grow its "Rules agents often break" list from real mistakes. For a stack not listed, copy `kits/_template/` to `kits/<stack>/` and fill it in. The init script offers every kit folder except those starting with `_`, and refuses a kit that is still the blank template.
 
 ## Start a new project
 
 Run the init script from a checkout of this repo at a release tag (use Git Bash on Windows) and answer its questions:
 
 ```bash
-scripts/init-project.sh
+bash scripts/init-project.sh
 ```
 
 It asks, in order:
@@ -61,7 +77,7 @@ Claude Code reads `CLAUDE.md`, which imports every level with `@path` imports. O
 
 - **Owners:** replace "Engineering practice group" in the file headers and the table above with whoever owns Level 1 and the kits in your organization.
 - **Level 1 rules:** adjust `level1-company/AGENTS.md` to your process, for example the retry cap, the PR label (`agent-assisted`) and what needs human approval.
-- **Stack kits:** copy `kits/dotnet-maui/` to `kits/<your-stack>/` and rewrite it. The init script lists every folder in `kits/` that contains an `AGENTS.md`.
+- **Stack kits:** adapt the samples you use, delete the ones you don't, and add your own from `kits/_template/`.
 - **Versions:** each file carries a `Version:` line. Tag releases of this repo, and have projects install from a tag.
 
 ## Text is the fallback, not the control
@@ -84,7 +100,8 @@ How many projects count as "several" is left to each organization.
 
 - [ ] CI check that fails when a test is deleted or skipped
 - [ ] CODEOWNERS examples for CI, infrastructure and dependency files
-- [ ] `.editorconfig` and architecture tests for the .NET MAUI kit
+- [ ] Ready-made checks for each sample kit (linter configs, architecture tests)
+- [ ] Sample kits for mobile stacks
 - [ ] Script that concatenates the levels into one `AGENTS.md` for non-Claude agents
 - [ ] PowerShell version of the init script
 
