@@ -1,0 +1,37 @@
+# Agent harness checks for CircleCI.
+# Merge the parameters, the job and the workflow into .circleci/config.yml.
+# CircleCI does not expose a pull request's target branch, so set base-branch
+# to the branch your pull requests merge into.
+#
+# Approving an intended test change: trigger the pipeline for the pull request's
+# branch with the parameter allow-test-changes set to true.
+version: 2.1
+
+parameters:
+  allow-test-changes:
+    type: boolean
+    default: false
+  base-branch:
+    type: string
+    default: main
+
+jobs:
+  agent-harness:
+    docker:
+      - image: cimg/base:current
+    steps:
+      - checkout
+      - run:
+          name: AGENTS.md is up to date
+          command: bash .harness/build-agents-md.sh --check
+      - run:
+          name: No deleted, skipped or weakened tests
+          command: |
+            export ALLOW_TEST_CHANGES=<< pipeline.parameters.allow-test-changes >>
+            export BASE_BRANCH=<< pipeline.parameters.base-branch >>
+            bash .harness/checks/protected-tests.sh
+
+workflows:
+  agent-harness:
+    jobs:
+      - agent-harness

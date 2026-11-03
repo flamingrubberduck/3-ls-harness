@@ -1,0 +1,10 @@
+# PHPStan with Larastan, from the Laravel stack kit.
+# Copy to the repository root. Run: vendor/bin/phpstan analyse
+includes:
+    - vendor/larastan/larastan/extension.neon
+
+parameters:
+    paths:
+        - app/
+    # Start where the codebase passes today and raise the level over time.
+    level: 5

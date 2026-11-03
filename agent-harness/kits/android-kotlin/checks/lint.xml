@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Android Lint severities from the Android stack kit. Put this in the app module folder. -->
+<lint>
+    <!-- User-facing text belongs in strings.xml. -->
+    <issue id="HardcodedText" severity="error" />
+    <!-- Static fields holding a Context leak memory. -->
+    <issue id="StaticFieldLeak" severity="error" />
+    <!-- Calls that need a runtime permission without checking it. -->
+    <issue id="MissingPermission" severity="error" />
+    <!-- JavaScript enabled in a WebView without review. -->
+    <issue id="SetJavaScriptEnabled" severity="error" />
+</lint>

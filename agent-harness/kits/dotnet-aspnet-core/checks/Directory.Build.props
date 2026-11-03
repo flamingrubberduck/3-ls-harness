@@ -1,0 +1,10 @@
+<!-- Applies to every project under the folder that contains this file. -->
+<Project>
+  <PropertyGroup>
+    <Nullable>enable</Nullable>
+    <!-- Nullable warnings fail the build instead of being ignored or suppressed. -->
+    <WarningsAsErrors>$(WarningsAsErrors);nullable</WarningsAsErrors>
+    <AnalysisLevel>latest-recommended</AnalysisLevel>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+  </PropertyGroup>
+</Project>

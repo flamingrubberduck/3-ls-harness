@@ -1,0 +1,31 @@
+# Agent harness checks for Bitbucket Pipelines.
+# Merge the "clone" setting, the pull-requests entry and the custom pipeline
+# into your bitbucket-pipelines.yml.
+#
+# Approving an intended test change: run the custom pipeline
+# "agent-harness-approved" on the pull request's branch (Run pipeline >
+# choose the branch > agent-harness-approved), entering its target branch.
+image: atlassian/default-image:4
+
+clone:
+  depth: full
+
+pipelines:
+  pull-requests:
+    '**':
+      - step:
+          name: Agent harness
+          script:
+            - bash .harness/build-agents-md.sh --check
+            - bash .harness/checks/protected-tests.sh
+
+  custom:
+    agent-harness-approved:
+      - variables:
+          - name: BASE_BRANCH
+            default: main
+      - step:
+          name: Agent harness (test changes approved by a reviewer)
+          script:
+            - bash .harness/build-agents-md.sh --check
+            - ALLOW_TEST_CHANGES=true bash .harness/checks/protected-tests.sh

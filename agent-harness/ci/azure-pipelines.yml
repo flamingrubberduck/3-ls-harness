@@ -1,0 +1,36 @@
+# Agent harness checks for Azure Pipelines.
+#
+# Azure Repos: create a pipeline from this file, then add it as a required
+#   build validation policy on your main branch (Branch policies > Build validation).
+# GitHub or Bitbucket repos: the pr trigger below runs it on pull requests.
+#
+# Approving an intended test change: re-run the pipeline manually for the pull
+# request branch with "Reviewer approved test changes" ticked, or let someone
+# with the "Bypass policies" permission complete the pull request with a reason.
+trigger: none
+
+pr:
+  branches:
+    include:
+      - '*'
+
+parameters:
+  - name: allowTestChanges
+    displayName: Reviewer approved test changes
+    type: boolean
+    default: false
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+  - checkout: self
+    fetchDepth: 0
+
+  - script: bash .harness/build-agents-md.sh --check
+    displayName: AGENTS.md is up to date
+
+  - script: bash .harness/checks/protected-tests.sh
+    displayName: No deleted, skipped or weakened tests
+    env:
+      ALLOW_TEST_CHANGES: ${{ lower(parameters.allowTestChanges) }}

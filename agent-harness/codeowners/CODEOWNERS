@@ -1,0 +1,74 @@
+# Example CODEOWNERS for the agent harness (GitHub and GitLab syntax).
+# Replace the @your-org/... teams with your own, delete what does not apply,
+# and see README.md in this folder for where the file goes on each platform.
+#
+# These paths match the company baseline's "Ask a human first" list:
+# changes to them need approval from a named owner, whoever made them.
+# When several patterns match a file, the last one wins.
+
+# ---- Agent instructions ---------------------------------------------------
+/.harness/                    @your-org/tech-leads
+/AGENTS.md                    @your-org/tech-leads
+/CLAUDE.md                    @your-org/tech-leads
+CODEOWNERS                    @your-org/tech-leads
+
+# ---- CI/CD pipelines ------------------------------------------------------
+/.github/workflows/           @your-org/platform-team
+/.gitlab-ci.yml               @your-org/platform-team
+/.gitlab/                     @your-org/platform-team
+/azure-pipelines*.yml         @your-org/platform-team
+/Jenkinsfile                  @your-org/platform-team
+/bitbucket-pipelines.yml      @your-org/platform-team
+/.circleci/                   @your-org/platform-team
+
+# ---- Infrastructure and deployment ---------------------------------------
+Dockerfile*                   @your-org/platform-team
+docker-compose*.yml           @your-org/platform-team
+*.tf                          @your-org/platform-team
+# Adjust to your repo's folder names:
+/infra/                       @your-org/platform-team
+/deploy/                      @your-org/platform-team
+
+# ---- Dependencies: manifests and lockfiles (license and supply-chain review)
+# JavaScript / TypeScript
+package.json                  @your-org/tech-leads
+package-lock.json             @your-org/tech-leads
+pnpm-lock.yaml                @your-org/tech-leads
+yarn.lock                     @your-org/tech-leads
+# Java / Kotlin / Android
+pom.xml                       @your-org/tech-leads
+build.gradle                  @your-org/tech-leads
+build.gradle.kts              @your-org/tech-leads
+settings.gradle*              @your-org/tech-leads
+libs.versions.toml            @your-org/tech-leads
+# .NET
+*.csproj                      @your-org/tech-leads
+Directory.Packages.props      @your-org/tech-leads
+Directory.Build.props         @your-org/tech-leads
+packages.lock.json            @your-org/tech-leads
+global.json                   @your-org/tech-leads
+# Python
+requirements*.txt             @your-org/tech-leads
+pyproject.toml                @your-org/tech-leads
+poetry.lock                   @your-org/tech-leads
+uv.lock                       @your-org/tech-leads
+Pipfile.lock                  @your-org/tech-leads
+# Go
+go.mod                        @your-org/tech-leads
+go.sum                        @your-org/tech-leads
+# PHP
+composer.json                 @your-org/tech-leads
+composer.lock                 @your-org/tech-leads
+# Flutter / Dart
+pubspec.yaml                  @your-org/tech-leads
+pubspec.lock                  @your-org/tech-leads
+# iOS / Swift
+Podfile                       @your-org/tech-leads
+Podfile.lock                  @your-org/tech-leads
+Package.swift                 @your-org/tech-leads
+Package.resolved              @your-org/tech-leads
+
+# ---- Mobile app identity and signing -------------------------------------
+AndroidManifest.xml           @your-org/mobile-leads
+Info.plist                    @your-org/mobile-leads
+*.entitlements                @your-org/mobile-leads

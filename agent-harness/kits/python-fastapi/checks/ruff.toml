@@ -1,0 +1,18 @@
+# Ruff configuration with the rules from the FastAPI stack kit.
+# Copy to the repository root, or move the settings under [tool.ruff] in pyproject.toml.
+line-length = 100
+
+[lint]
+select = [
+    "E", "W",   # pycodestyle, including bare except (E722)
+    "F",        # pyflakes
+    "I",        # import order
+    "B",        # bugbear, including mutable default arguments (B006)
+    "BLE",      # catching Exception without a reason
+    "ASYNC",    # blocking calls inside async functions
+    "S",        # common security issues
+    "UP",       # modern Python syntax
+]
+
+[lint.per-file-ignores]
+"tests/**" = ["S101"]   # assert is how tests check things

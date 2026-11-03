@@ -1,0 +1,30 @@
+# Agent harness checks for GitHub Actions.
+# Install as .github/workflows/agent-harness.yml (init-project.sh does this),
+# then make the "agent-harness" check required in your branch protection rules.
+#
+# Approving an intended test change: add the label "test-change-approved"
+# to the pull request; the label event re-runs this workflow.
+name: agent-harness
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled, unlabeled]
+
+permissions:
+  contents: read
+
+jobs:
+  agent-harness:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: AGENTS.md is up to date
+        run: bash .harness/build-agents-md.sh --check
+
+      - name: No deleted, skipped or weakened tests
+        env:
+          ALLOW_TEST_CHANGES: ${{ contains(github.event.pull_request.labels.*.name, 'test-change-approved') }}
+        run: bash .harness/checks/protected-tests.sh

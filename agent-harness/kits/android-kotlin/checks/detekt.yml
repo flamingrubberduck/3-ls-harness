@@ -1,0 +1,13 @@
+# detekt rules from the Android stack kit, on top of the default config.
+# Use with buildUponDefaultConfig = true in the detekt Gradle block.
+coroutines:
+  GlobalCoroutineUsage:
+    active: true
+  InjectDispatcher:
+    active: true
+  SleepInsteadOfDelay:
+    active: true
+
+potential-bugs:
+  UnsafeCallOnNullableType:
+    active: true
